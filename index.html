@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Acadia — Product Grid</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div id="toast" class="toast" aria-live="polite" aria-atomic="true" hidden>
+      <div class="toast__content">
+        <strong class="toast__title">Added to cart</strong>
+        <span class="toast__msg">Product added successfully.</span>
+      </div>
+      <div class="toast__bar" aria-hidden="true"></div>
+    </div>
+
+    <main class="page">
+      <header class="page__header">
+        <h1 class="page__title">Products</h1>
+
+        <div class="controls">
+          <label class="controls__label" for="search">Search</label>
+          <input
+            id="search"
+            class="controls__input"
+            type="search"
+            placeholder="Type a product title..."
+            autocomplete="off"
+          />
+
+          <button id="addSample" class="controls__btn" type="button">
+            Add Sample Product
+          </button>
+        </div>
+      </header>
+
+      <section aria-label="Product list">
+        <div id="grid" class="grid">
+          <!-- Cards entram aqui (via JS depois) -->
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js" defer></script>
+  </body>
+</html>

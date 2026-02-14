@@ -1,0 +1,305 @@
+/* ========== Base ========== */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0b0c10;
+  --card: #11131a;
+  --border: #23283a;
+  --text: #e9ecf1;
+  --muted: #b8c0d4;
+  --brand: #4f8cff;
+  --brand-2: #3a6fe0;
+  --success: #1f8f4a;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+body {
+  margin: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ========== Header / Controls ========== */
+.page__header {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.page__title {
+  font-size: 24px;
+  margin: 0;
+}
+
+.controls {
+  display: grid;
+  gap: 10px;
+}
+
+.controls__label {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.controls__input {
+  width: 100%;
+  padding: 12px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #0f1118;
+  color: var(--text);
+  outline: none;
+}
+
+.controls__input:focus {
+  border-color: rgba(79, 140, 255, 0.8);
+  box-shadow: 0 0 0 3px rgba(79, 140, 255, 0.15);
+}
+
+.controls__btn {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #0f1118;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.controls__btn:hover {
+  border-color: rgba(79, 140, 255, 0.65);
+}
+
+/* ========== Grid (Mobile-first) ========== */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr; /* mobile: 1 coluna */
+  gap: 14px;
+}
+
+/* Tablet >=768px: 2 colunas */
+@media (min-width: 768px) {
+  .controls {
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    column-gap: 12px;
+  }
+
+  .controls__label {
+    grid-column: 1 / -1;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Desktop >=1024px: 3 colunas */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ========== Card ========== */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0; /* evita overflow */
+}
+
+.card__media {
+  background: #0f1118;
+  padding: 14px;
+  display: grid;
+  place-items: center;
+}
+
+.card__img {
+  width: 100%;
+  height: 190px;
+  object-fit: contain; /* imagem fluidamente */
+  display: block;
+}
+
+.card__body {
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.card__title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.25;
+
+  /* Reserva altura consistente */
+  min-height: calc(1.25em * 2);
+
+  /* Limita visualmente a 2 linhas */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.card__desc {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+
+  /* padrão moderno */
+  line-clamp: 2;
+
+  /* fallback webkit */
+  -webkit-line-clamp: 2;
+
+  overflow: hidden;
+}
+
+.card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.card__price {
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+/* Botão Add to Cart */
+.card__btn {
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--brand);
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.card__btn:hover {
+  background: var(--brand-2);
+}
+
+/* Estado visual quando "Added" */
+.card.is-added {
+  border-color: rgba(31, 143, 74, 0.65);
+  box-shadow: 0 12px 36px rgba(31, 143, 74, 0.12);
+}
+
+.card.is-added .card__btn {
+  background: var(--success);
+}
+
+/* Ocultar no filtro */
+.card.is-hidden {
+  display: none;
+}
+
+.controls__btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  width: min(520px, calc(100% - 28px));
+  background: #0f1118;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.toast__content {
+  padding: 12px 14px;
+  display: grid;
+  gap: 4px;
+}
+
+.toast__title {
+  font-size: 14px;
+}
+
+.toast__msg {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.toast__bar {
+  height: 3px;
+  width: 100%;
+  transform-origin: left;
+  background: var(--brand);
+}
+
+.toast.is-showing {
+  animation: toastIn 0.18s ease-out;
+}
+
+.toast.is-hiding {
+  animation: toastOut 0.16s ease-in forwards;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes toastOut {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+}
+
+.toast.is-success .toast__bar {
+  background: var(--success);
+}
+
+.toast.is-danger .toast__bar {
+  background: #ff4d4d;
+}
